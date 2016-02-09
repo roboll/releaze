@@ -17,9 +17,8 @@ var ldflags = cli.Command{
 }
 
 var defaultCollectors = map[string]func() string{
-	"github.com/roboll/releaze/pkg/releaze.version": func() string { return "version" },
-	"github.com/roboll/releaze/pkg/scm/git.commit":  func() string { return "commit" },
-	"github.com/roboll/releaze/pkg/scm/git.branch":  func() string { return "branch" },
+	"github.com/roboll/releaze/pkg/scm/git.commit": tryGitCommit,
+	"github.com/roboll/releaze/pkg/scm/git.branch": tryGitBranch,
 }
 
 func printLdflags(out io.Writer, collectors map[string]func() string) {
@@ -36,9 +35,17 @@ func printLdflags(out io.Writer, collectors map[string]func() string) {
 
 	wg.Wait()
 
-	//out.Write([]byte(`"`))
 	for key, val := range flags {
 		out.Write([]byte(fmt.Sprintf("-X %s=%s ", key, val)))
 	}
-	//out.Write([]byte(`" `))
+}
+
+func tryGitCommit() string {
+	//TODO
+	return "commit"
+}
+
+func tryGitBranch() string {
+	//TODO
+	return "branch"
 }

@@ -2,7 +2,7 @@ package cmd
 
 import "github.com/codegangsta/cli"
 
-var cmds = []cli.Command{ldflags}
+var cmds = []cli.Command{ldflags, version}
 
 func RunCli(args []string) {
 	app := cli.NewApp()
